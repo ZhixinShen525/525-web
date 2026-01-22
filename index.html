@@ -5,6 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>777 Tower | Los Angeles</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slideshow {
+            position: absolute;
+            inset: 0;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.35),
+                rgba(0, 0, 0, 0.35)
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            margin: 0;
+            font-size: 4rem;
+            letter-spacing: 0.25em;
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+                letter-spacing: 0.18em;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -20,6 +81,14 @@
     </header>
 
     <section class="hero">
+        <div class="slideshow" aria-hidden="true">
+            <img src="image1.jpg" class="slide active" alt="">
+            <img src="image2.jpg" class="slide" alt="">
+            <img src="image3.jpg" class="slide" alt="">
+        </div>
+
+        <div class="hero-overlay" aria-hidden="true"></div>
+
         <div class="hero-content">
             <h1>777 TOWER</h1>
         </div>
@@ -45,4 +114,14 @@
     </footer>
 
 </body>
+<script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 4000);
+</script>
 </html>
