@@ -65,6 +65,69 @@
                 letter-spacing: 0.18em;
             }
         }
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden; /* prevent scrolling on home */
+        }
+
+        /* Simple page-view system */
+        .view {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .page {
+            position: absolute;
+            inset: 0;
+            background: #fff;
+            color: #111;
+            z-index: 10;
+            display: none; /* hidden until nav click */
+            overflow: auto; /* page itself can scroll if content is long */
+            -webkit-overflow-scrolling: touch;
+            padding: 110px 20px 40px; /* leave room for fixed header */
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page .container,
+        .page .stats-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .back-btn {
+            border: 1px solid rgba(0,0,0,0.2);
+            background: #fff;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .back-btn:hover {
+            background: rgba(0,0,0,0.04);
+        }
+
+        /* Keep hero visible as the home view */
+        .hero.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -73,9 +136,9 @@
         <nav>
             <div class="logo">777 TOWER</div>
             <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#details">Details</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="javascript:void(0)" data-view="about">About</a></li>
+                <li><a href="javascript:void(0)" data-view="details">Key Statistics</a></li>
+                <li><a href="javascript:void(0)" data-view="contact">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -94,20 +157,39 @@
         </div>
     </section>
 
-    <section id="about" class="container">
-        <h2>About the Building</h2>
-    </section>
+    <!-- Pages (shown when clicking nav buttons) -->
+    <section class="view">
+        <div class="page" id="page-about" role="dialog" aria-modal="true" aria-label="About">
+            <div class="page-header">
+                <h2 style="margin:0;">About</h2>
+                <button class="back-btn" type="button" data-back>Back</button>
+            </div>
+            <div class="container">
+                <p>Add your About content here.</p>
+            </div>
+        </div>
 
-    <section id="details" class="stats-container">
-        <h2>Key Statistics</h2>
-    </section>
+        <div class="page" id="page-details" role="dialog" aria-modal="true" aria-label="Key Statistics">
+            <div class="page-header">
+                <h2 style="margin:0;">Key Statistics</h2>
+                <button class="back-btn" type="button" data-back>Back</button>
+            </div>
+            <div class="stats-container">
+                <p>Add your Key Statistics content here.</p>
+            </div>
+        </div>
 
-    <section id="contact" class="container">
-        <h2>Contact</h2>
-        <p><strong>Name:</strong> Zhixin Shen</p>
-        <p><strong>Phone:</strong> <a href="tel:16268221911">(626) 822-1911</a></p>
+        <div class="page" id="page-contact" role="dialog" aria-modal="true" aria-label="Contact">
+            <div class="page-header">
+                <h2 style="margin:0;">Contact</h2>
+                <button class="back-btn" type="button" data-back>Back</button>
+            </div>
+            <div class="container">
+                <p><strong>Name:</strong> Zhixin Shen</p>
+                <p><strong>Phone:</strong> <a href="tel:16268221911">(626) 822-1911</a></p>
+            </div>
+        </div>
     </section>
-
 
     <footer>
         <p>&copy; 2026 777 Tower Fan Site. All rights reserved.</p>
@@ -115,13 +197,52 @@
 
 </body>
 <script>
+    // Slideshow
     const slides = document.querySelectorAll('.slide');
     let current = 0;
 
-    setInterval(() => {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-    }, 4000);
+    if (slides.length > 0) {
+        setInterval(() => {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 4000);
+    }
+
+    // Page navigation (no scrolling on home)
+    const hero = document.querySelector('.hero');
+    const pages = {
+        about: document.getElementById('page-about'),
+        details: document.getElementById('page-details'),
+        contact: document.getElementById('page-contact')
+    };
+
+    function showPage(key) {
+        Object.values(pages).forEach(p => p.classList.remove('active'));
+        if (pages[key]) {
+            pages[key].classList.add('active');
+            hero.classList.add('hidden');
+        }
+    }
+
+    function showHome() {
+        Object.values(pages).forEach(p => p.classList.remove('active'));
+        hero.classList.remove('hidden');
+    }
+
+    document.querySelectorAll('a[data-view]').forEach(link => {
+        link.addEventListener('click', () => showPage(link.dataset.view));
+    });
+
+    document.querySelectorAll('[data-back]').forEach(btn => {
+        btn.addEventListener('click', () => showHome());
+    });
+
+    // Also allow clicking the logo to go home
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        logo.style.cursor = 'pointer';
+        logo.addEventListener('click', showHome);
+    }
 </script>
 </html>
