@@ -6,32 +6,48 @@
     <title>777 Tower | Los Angeles</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .hero.hidden { display: none; }
+      .page { display: none; }
+      .page.active { display: block; }
+    </style>
 </head>
 <body>
 
-<header class="fixed top-0 left-0 w-full bg-white z-50 border-b border-gray-100">
+<header class="fixed top-0 left-0 w-full bg-white/70 backdrop-blur-md z-50 border-b border-white/20">
   <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-    
+
     <div class="flex-shrink-0">
-      <h1 class="text-3xl font-serif tracking-tighter text-[#004A44] font-bold">RUDIN</h1>
+      <h1 class="text-3xl font-serif tracking-tighter text-[#004A44] font-bold cursor-pointer select-none" data-home>777 TOWER</h1>
     </div>
 
+    <!-- Desktop nav -->
     <nav class="hidden lg:flex space-x-8 h-full">
-      <a href="#" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
+      <a href="javascript:void(0)" data-view="about" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
         <span class="absolute top-0 left-0 w-full h-1 bg-[#004A44] scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-        Office Properties
+        About
       </a>
-      <a href="#" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
+      <a href="javascript:void(0)" data-view="details" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
         <span class="absolute top-0 left-0 w-full h-1 bg-[#004A44] scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-        Residential Properties
+        Key Statistics
       </a>
-      <a href="#" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
-        Recent Projects
+      <a href="javascript:void(0)" data-view="contact" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
+        <span class="absolute top-0 left-0 w-full h-1 bg-[#004A44] scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+        Contact
       </a>
     </nav>
 
-    <div class="flex items-center">
-      <button class="flex items-center border border-gray-300 px-4 py-2 hover:bg-gray-50 transition-colors">
+    <div class="flex items-center gap-3">
+      <!-- Mobile menu button -->
+      <button type="button" class="lg:hidden flex items-center border border-gray-300 px-4 py-2 hover:bg-gray-50 transition-colors" aria-controls="mobile-menu" aria-expanded="false" data-mobile-menu-btn>
+        <span class="text-sm font-medium text-gray-700">Menu</span>
+        <svg class="ml-2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <!-- CTA: opens Key Statistics for now -->
+      <button type="button" data-view="details" class="hidden sm:flex items-center border border-gray-300 px-4 py-2 hover:bg-gray-50 transition-colors">
         <span class="bg-[#004A44] p-1 mr-3">
           <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -44,6 +60,23 @@
       </button>
     </div>
 
+  </div>
+
+  <!-- Mobile menu panel -->
+  <div id="mobile-menu" class="lg:hidden hidden border-t border-gray-100 bg-white">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+      <a href="javascript:void(0)" data-view="about" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">About</a>
+      <a href="javascript:void(0)" data-view="details" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">Key Statistics</a>
+      <a href="javascript:void(0)" data-view="contact" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">Contact</a>
+      <button type="button" data-view="details" class="flex items-center border border-gray-300 px-4 py-2 hover:bg-gray-50 transition-colors w-fit">
+        <span class="bg-[#004A44] p-1 mr-3">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </span>
+        <span class="text-sm font-medium text-gray-700">Search Availabilities</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -112,33 +145,7 @@
             }, 4500);
         }
 
-        // Menu overlay
-        const menu = document.getElementById('site-menu');
-        const menuBtn = document.querySelector('.menu-btn');
-        const menuClose = document.querySelector('.menu-close');
-
-        function openMenu() {
-            menu.classList.add('open');
-            menu.setAttribute('aria-hidden', 'false');
-            menuBtn.setAttribute('aria-expanded', 'true');
-            document.body.classList.add('menu-open');
-        }
-
-        function closeMenu() {
-            menu.classList.remove('open');
-            menu.setAttribute('aria-hidden', 'true');
-            menuBtn.setAttribute('aria-expanded', 'false');
-            document.body.classList.remove('menu-open');
-        }
-
-        menuBtn?.addEventListener('click', () => {
-            if (menu.classList.contains('open')) closeMenu();
-            else openMenu();
-        });
-
-        menuClose?.addEventListener('click', closeMenu);
-
-        // Page navigation
+        // Overlay pages
         const hero = document.querySelector('.hero');
         const pages = {
             about: document.getElementById('page-about'),
@@ -147,22 +154,22 @@
         };
 
         function showPage(key) {
-            Object.values(pages).forEach(p => p.classList.remove('active'));
+            Object.values(pages).forEach(p => p?.classList.remove('active'));
             if (pages[key]) {
                 pages[key].classList.add('active');
-                hero.classList.add('hidden');
-                closeMenu();
+                hero?.classList.add('hidden');
             }
+            closeMobileMenu();
         }
 
         function showHome() {
-            Object.values(pages).forEach(p => p.classList.remove('active'));
-            hero.classList.remove('hidden');
-            closeMenu();
+            Object.values(pages).forEach(p => p?.classList.remove('active'));
+            hero?.classList.remove('hidden');
+            closeMobileMenu();
         }
 
-        document.querySelectorAll('[data-view]').forEach(link => {
-            link.addEventListener('click', () => showPage(link.dataset.view));
+        document.querySelectorAll('[data-view]').forEach(el => {
+            el.addEventListener('click', () => showPage(el.dataset.view));
         });
 
         document.querySelectorAll('[data-back]').forEach(btn => {
@@ -170,13 +177,40 @@
         });
 
         document.querySelectorAll('[data-home]').forEach(el => {
-            el.style.cursor = 'pointer';
             el.addEventListener('click', showHome);
         });
 
-        // Close menu on Escape
+        // Mobile menu
+        const mobileMenuBtn = document.querySelector('[data-mobile-menu-btn]');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function openMobileMenu() {
+            if (!mobileMenu) return;
+            mobileMenu.classList.remove('hidden');
+            mobileMenuBtn?.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeMobileMenu() {
+            if (!mobileMenu) return;
+            mobileMenu.classList.add('hidden');
+            mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+        }
+
+        function toggleMobileMenu() {
+            if (!mobileMenu) return;
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) openMobileMenu();
+            else closeMobileMenu();
+        }
+
+        mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+
+        // ESC closes overlays + mobile menu
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+                showHome();
+            }
         });
     </script>
 </body>
