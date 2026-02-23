@@ -29,7 +29,7 @@
       </a>
       <a href="javascript:void(0)" data-view="details" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
         <span class="absolute top-0 left-0 w-full h-1 bg-black scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-        Key Statistics
+        Position
       </a>
       <a href="javascript:void(0)" data-view="contact" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
         <span class="absolute top-0 left-0 w-full h-1 bg-black scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
@@ -45,19 +45,6 @@
           <path d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
-
-      <!-- CTA: opens Key Statistics for now -->
-      <button type="button" data-view="details" class="hidden sm:flex items-center border border-gray-300 px-4 py-2 hover:bg-gray-50 transition-colors">
-        <span class="bg-black p-1 mr-3">
-          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-        </span>
-        <span class="text-sm font-medium text-gray-700">Search Availabilities</span>
-        <svg class="ml-2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M19 9l-7 7-7-7"></path>
-        </svg>
-      </button>
     </div>
 
   </div>
@@ -66,16 +53,8 @@
   <div id="mobile-menu" class="lg:hidden hidden border-t border-gray-100 bg-white">
     <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
       <a href="javascript:void(0)" data-view="about" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">About</a>
-      <a href="javascript:void(0)" data-view="details" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">Key Statistics</a>
+      <a href="javascript:void(0)" data-view="details" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">Position</a>
       <a href="javascript:void(0)" data-view="contact" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">Contact</a>
-      <button type="button" data-view="details" class="flex items-center border border-gray-300 px-4 py-2 hover:bg-gray-50 transition-colors w-fit">
-        <span class="bg-black p-1 mr-3">
-          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-        </span>
-        <span class="text-sm font-medium text-gray-700">Search Availabilities</span>
-      </button>
     </div>
   </div>
 </header>
@@ -106,13 +85,25 @@
             </div>
         </div>
 
-        <div class="page" id="page-details" role="dialog" aria-modal="true" aria-label="Key Statistics">
+        <div class="page" id="page-details" role="dialog" aria-modal="true" aria-label="Position">
             <div class="page-header">
-                <h2>Key Statistics</h2>
+                <h2>Position</h2>
                 <button class="back-btn" type="button" data-back>Back</button>
             </div>
             <div class="stats-container">
-                <p>Add your Key Statistics content here.</p>
+                <p class="text-sm text-gray-700 mb-4"><strong>Address:</strong> 525 B St, San Diego, CA</p>
+
+                <div class="w-full overflow-hidden rounded-lg border border-gray-200">
+                    <iframe
+                        title="Google Map - 525 B St, San Diego, CA"
+                        src="https://www.google.com/maps?q=525%20B%20St%2C%20San%20Diego%2C%20CA&output=embed"
+                        width="100%"
+                        height="450"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
 
