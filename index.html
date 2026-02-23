@@ -5,149 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>777 Tower | Los Angeles</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .hero {
-            position: relative;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .slideshow {
-            position: absolute;
-            inset: 0;
-        }
-
-        .slide {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
-
-        .slide.active {
-            opacity: 1;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(0, 0, 0, 0.35),
-                rgba(0, 0, 0, 0.35)
-            );
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-align: center;
-        }
-
-        .hero-content h1 {
-            margin: 0;
-            font-size: 4rem;
-            letter-spacing: 0.25em;
-        }
-
-        @media (max-width: 600px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-                letter-spacing: 0.18em;
-            }
-        }
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            margin: 0;
-            overflow: hidden; /* prevent scrolling on home */
-        }
-
-        /* Simple page-view system */
-        .view {
-            position: relative;
-            height: 100vh;
-            width: 100%;
-        }
-
-        .page {
-            position: absolute;
-            inset: 0;
-            background: #fff;
-            color: #111;
-            z-index: 10;
-            display: none; /* hidden until nav click */
-            overflow: auto; /* page itself can scroll if content is long */
-            -webkit-overflow-scrolling: touch;
-            padding: 110px 20px 40px; /* leave room for fixed header */
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .page .container,
-        .page .stats-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .page-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .back-btn {
-            border: 1px solid rgba(0,0,0,0.2);
-            background: #fff;
-            padding: 10px 14px;
-            border-radius: 10px;
-            cursor: pointer;
-            font: inherit;
-        }
-
-        .back-btn:hover {
-            background: rgba(0,0,0,0.04);
-        }
-
-        /* Keep hero visible as the home view */
-        .hero.hidden {
-            display: none;
-        }
-    </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <div class="logo">777 TOWER</div>
-            <ul class="nav-links">
-                <li><a href="javascript:void(0)" data-view="about">About</a></li>
-                <li><a href="javascript:void(0)" data-view="details">Key Statistics</a></li>
-                <li><a href="javascript:void(0)" data-view="contact">Contact</a></li>
-            </ul>
-        </nav>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="logo" data-home>777 TOWER</div>
+
+            <button class="menu-btn" type="button" aria-controls="site-menu" aria-expanded="false">
+                <span class="menu-btn__label">Menu</span>
+                <span class="menu-btn__icon" aria-hidden="true"></span>
+            </button>
+        </div>
     </header>
+
+    <!-- Fullscreen menu overlay -->
+    <div class="menu-overlay" id="site-menu" aria-hidden="true">
+        <div class="menu-overlay__top">
+            <div class="menu-overlay__brand">777 TOWER</div>
+            <button class="menu-close" type="button" aria-label="Close menu">Close</button>
+        </div>
+
+        <div class="menu-overlay__content">
+            <a href="javascript:void(0)" class="menu-link" data-view="about">About</a>
+            <a href="javascript:void(0)" class="menu-link" data-view="details">Key Statistics</a>
+            <a href="javascript:void(0)" class="menu-link" data-view="contact">Contact</a>
+        </div>
+
+        <div class="menu-overlay__footer">
+            <div class="menu-meta">Los Angeles</div>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="slideshow" aria-hidden="true">
-            <img src="1000006180.jpg" class="slide active" alt="">
-            <img src="1000006180.jpg" class="slide" alt="">
-            <img src="1000006180.jpg" class="slide" alt="">
+            <img src="image1.jpg" class="slide active" alt="">
+            <img src="image2.jpg" class="slide" alt="">
+            <img src="image3.jpg" class="slide" alt="">
         </div>
 
         <div class="hero-overlay" aria-hidden="true"></div>
@@ -158,10 +52,10 @@
     </section>
 
     <!-- Pages (shown when clicking nav buttons) -->
-    <section class="view">
+    <section class="view" aria-hidden="true">
         <div class="page" id="page-about" role="dialog" aria-modal="true" aria-label="About">
             <div class="page-header">
-                <h2 style="margin:0;">About</h2>
+                <h2>About</h2>
                 <button class="back-btn" type="button" data-back>Back</button>
             </div>
             <div class="container">
@@ -171,7 +65,7 @@
 
         <div class="page" id="page-details" role="dialog" aria-modal="true" aria-label="Key Statistics">
             <div class="page-header">
-                <h2 style="margin:0;">Key Statistics</h2>
+                <h2>Key Statistics</h2>
                 <button class="back-btn" type="button" data-back>Back</button>
             </div>
             <div class="stats-container">
@@ -181,7 +75,7 @@
 
         <div class="page" id="page-contact" role="dialog" aria-modal="true" aria-label="Contact">
             <div class="page-header">
-                <h2 style="margin:0;">Contact</h2>
+                <h2>Contact</h2>
                 <button class="back-btn" type="button" data-back>Back</button>
             </div>
             <div class="container">
@@ -192,57 +86,88 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 777 Tower Fan Site. All rights reserved.</p>
+        <p>&copy; 2026 777 Tower. All rights reserved.</p>
     </footer>
 
-</body>
-<script>
-    // Slideshow
-    const slides = document.querySelectorAll('.slide');
-    let current = 0;
+    <script>
+        // Slideshow
+        const slides = document.querySelectorAll('.slide');
+        let current = 0;
 
-    if (slides.length > 0) {
-        setInterval(() => {
-            slides[current].classList.remove('active');
-            current = (current + 1) % slides.length;
-            slides[current].classList.add('active');
-        }, 4000);
-    }
-
-    // Page navigation (no scrolling on home)
-    const hero = document.querySelector('.hero');
-    const pages = {
-        about: document.getElementById('page-about'),
-        details: document.getElementById('page-details'),
-        contact: document.getElementById('page-contact')
-    };
-
-    function showPage(key) {
-        Object.values(pages).forEach(p => p.classList.remove('active'));
-        if (pages[key]) {
-            pages[key].classList.add('active');
-            hero.classList.add('hidden');
+        if (slides.length > 0) {
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 4500);
         }
-    }
 
-    function showHome() {
-        Object.values(pages).forEach(p => p.classList.remove('active'));
-        hero.classList.remove('hidden');
-    }
+        // Menu overlay
+        const menu = document.getElementById('site-menu');
+        const menuBtn = document.querySelector('.menu-btn');
+        const menuClose = document.querySelector('.menu-close');
 
-    document.querySelectorAll('a[data-view]').forEach(link => {
-        link.addEventListener('click', () => showPage(link.dataset.view));
-    });
+        function openMenu() {
+            menu.classList.add('open');
+            menu.setAttribute('aria-hidden', 'false');
+            menuBtn.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('menu-open');
+        }
 
-    document.querySelectorAll('[data-back]').forEach(btn => {
-        btn.addEventListener('click', () => showHome());
-    });
+        function closeMenu() {
+            menu.classList.remove('open');
+            menu.setAttribute('aria-hidden', 'true');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('menu-open');
+        }
 
-    // Also allow clicking the logo to go home
-    const logo = document.querySelector('.logo');
-    if (logo) {
-        logo.style.cursor = 'pointer';
-        logo.addEventListener('click', showHome);
-    }
-</script>
+        menuBtn?.addEventListener('click', () => {
+            if (menu.classList.contains('open')) closeMenu();
+            else openMenu();
+        });
+
+        menuClose?.addEventListener('click', closeMenu);
+
+        // Page navigation
+        const hero = document.querySelector('.hero');
+        const pages = {
+            about: document.getElementById('page-about'),
+            details: document.getElementById('page-details'),
+            contact: document.getElementById('page-contact')
+        };
+
+        function showPage(key) {
+            Object.values(pages).forEach(p => p.classList.remove('active'));
+            if (pages[key]) {
+                pages[key].classList.add('active');
+                hero.classList.add('hidden');
+                closeMenu();
+            }
+        }
+
+        function showHome() {
+            Object.values(pages).forEach(p => p.classList.remove('active'));
+            hero.classList.remove('hidden');
+            closeMenu();
+        }
+
+        document.querySelectorAll('[data-view]').forEach(link => {
+            link.addEventListener('click', () => showPage(link.dataset.view));
+        });
+
+        document.querySelectorAll('[data-back]').forEach(btn => {
+            btn.addEventListener('click', showHome);
+        });
+
+        document.querySelectorAll('[data-home]').forEach(el => {
+            el.style.cursor = 'pointer';
+            el.addEventListener('click', showHome);
+        });
+
+        // Close menu on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+        });
+    </script>
+</body>
 </html>
