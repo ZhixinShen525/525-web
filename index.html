@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      .hero.hidden { display: none; }
-      .page { display: none; }
-      .page.active { display: block; }
+      html { scroll-behavior: smooth; }
+      /* Enable scrolling since About/Address will be on the homepage */
+      body { overflow: auto; }
       /* Mobile menu open/close animation */
       #mobile-menu {
         max-height: 0;
@@ -38,17 +38,13 @@
 
     <!-- Desktop nav -->
     <nav class="hidden lg:flex space-x-8 h-full lg:justify-self-center">
-      <a href="javascript:void(0)" data-view="about" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
+      <a href="#about" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
         <span class="absolute top-0 left-0 w-full h-1 bg-black scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
         About
       </a>
-      <a href="javascript:void(0)" data-view="details" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
+      <a href="#address" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
         <span class="absolute top-0 left-0 w-full h-1 bg-black scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
         Address
-      </a>
-      <a href="javascript:void(0)" data-view="contact" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
-        <span class="absolute top-0 left-0 w-full h-1 bg-black scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-        Contact
       </a>
     </nav>
 
@@ -69,9 +65,8 @@
   <!-- Mobile menu panel -->
   <div id="mobile-menu" class="lg:hidden bg-transparent">
     <div class="w-1/2 ml-auto bg-white border-l border-b border-gray-100 px-6 py-4 flex flex-col gap-4">
-      <a href="javascript:void(0)" data-view="about" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">About</a>
-      <a href="javascript:void(0)" data-view="details" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">Address</a>
-      <a href="javascript:void(0)" data-view="contact" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">Contact</a>
+      <a href="#about" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black" data-mobile-link>About</a>
+      <a href="#address" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black" data-mobile-link>Address</a>
     </div>
   </div>
 </header>
@@ -90,63 +85,50 @@
         </div>
     </section>
 
-    <!-- Pages (shown when clicking nav buttons) -->
-    <section class="view" aria-hidden="true">
-        <div class="page" id="page-about" role="dialog" aria-modal="true" aria-label="About">
-            <div class="page-header">
-                <h2>About</h2>
-                <button class="back-btn" type="button" data-back>Back</button>
-            </div>
-            <div class="container">
-                <p>Add your About content here.</p>
-            </div>
-        </div>
+    <main class="pt-10">
+        <section id="about" class="max-w-4xl mx-auto px-6 py-16">
+            <h2 class="text-2xl font-semibold text-black mb-6">About</h2>
+            <p class="text-base text-gray-800 leading-relaxed">
+                Add your About content here.
+            </p>
+        </section>
 
-        <div class="page" id="page-details" role="dialog" aria-modal="true" aria-label="Address">
-            <div class="page-header">
-                <h2>Address</h2>
-                <button class="back-btn" type="button" data-back>Back</button>
-            </div>
-            <div class="stats-container">
-                <p class="text-lg font-semibold text-black mb-2"><strong>Address:</strong> 525 B St, San Diego, CA</p>
+        <section id="address" class="max-w-4xl mx-auto px-6 pb-20">
+            <h2 class="text-2xl font-semibold text-black mb-6">Address</h2>
 
-                <div class="mb-4">
-                    <a
-                        href="https://www.google.com/maps/dir/?api=1&destination=525+B+St+San+Diego+CA"
-                        target="_blank"
-                        class="text-sm font-medium underline text-black hover:opacity-70">
-                        Get Directions
-                    </a>
-                </div>
+            <p class="text-lg font-semibold text-black mb-2"><strong>Address:</strong> 525 B St, San Diego, CA</p>
 
-                <div class="w-full lg:w-2/3 mx-auto overflow-hidden rounded-lg border border-gray-200">
-                    <iframe
-                        title="Google Map - 525 B St, San Diego, CA"
-                        src="https://www.google.com/maps?q=525%20B%20St%2C%20San%20Diego%2C%20CA&output=embed"
-                        width="100%"
-                        height="450"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+            <div class="mb-6">
+                <a
+                    href="https://www.google.com/maps/dir/?api=1&destination=525+B+St+San+Diego+CA"
+                    target="_blank"
+                    class="text-sm font-medium underline text-black hover:opacity-70">
+                    Get Directions
+                </a>
             </div>
-        </div>
 
-        <div class="page" id="page-contact" role="dialog" aria-modal="true" aria-label="Contact">
-            <div class="page-header">
-                <h2>Contact</h2>
-                <button class="back-btn" type="button" data-back>Back</button>
+            <div class="w-full lg:w-2/3 mx-auto overflow-hidden rounded-lg border border-gray-200 bg-white">
+                <iframe
+                    title="Google Map - 525 B St, San Diego, CA"
+                    src="https://www.google.com/maps?q=525%20B%20St%2C%20San%20Diego%2C%20CA&output=embed"
+                    width="100%"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <div class="container">
-                <p><strong>Name:</strong> Zhixin Shen</p>
-                <p><strong>Phone:</strong> <a href="tel:16268221911">(626) 822-1911</a></p>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer class="py-2">
-        <p>&copy; 2026 777 Tower. All rights reserved.</p>
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p>&copy; 2026 777 Tower. All rights reserved.</p>
+            <p class="text-sm">
+                <span class="font-semibold">Zhixin Shen</span> ·
+                <a class="underline hover:opacity-70" href="tel:16268221911">(626) 822-1911</a>
+            </p>
+        </div>
     </footer>
 
     <script>
@@ -161,41 +143,6 @@
                 slides[current].classList.add('active');
             }, 4500);
         }
-
-        // Overlay pages
-        const hero = document.querySelector('.hero');
-        const pages = {
-            about: document.getElementById('page-about'),
-            details: document.getElementById('page-details'),
-            contact: document.getElementById('page-contact')
-        };
-
-        function showPage(key) {
-            Object.values(pages).forEach(p => p?.classList.remove('active'));
-            if (pages[key]) {
-                pages[key].classList.add('active');
-                hero?.classList.add('hidden');
-            }
-            closeMobileMenu();
-        }
-
-        function showHome() {
-            Object.values(pages).forEach(p => p?.classList.remove('active'));
-            hero?.classList.remove('hidden');
-            closeMobileMenu();
-        }
-
-        document.querySelectorAll('[data-view]').forEach(el => {
-            el.addEventListener('click', () => showPage(el.dataset.view));
-        });
-
-        document.querySelectorAll('[data-back]').forEach(btn => {
-            btn.addEventListener('click', showHome);
-        });
-
-        document.querySelectorAll('[data-home]').forEach(el => {
-            el.addEventListener('click', showHome);
-        });
 
         // Mobile menu
         const mobileMenuBtn = document.querySelector('[data-mobile-menu-btn]');
@@ -225,11 +172,17 @@
 
         mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
 
-        // ESC closes overlays + mobile menu
+        // Close mobile menu when clicking a mobile nav link
+        document.querySelectorAll('[data-mobile-link]').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
+
+        // ESC closes mobile menu
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeMobileMenu();
-                showHome();
             }
         });
     </script>
