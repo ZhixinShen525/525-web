@@ -108,9 +108,18 @@
                 <button class="back-btn" type="button" data-back>Back</button>
             </div>
             <div class="stats-container">
-                <p class="text-sm text-gray-700 mb-4"><strong>Address:</strong> 525 B St, San Diego, CA</p>
+                <p class="text-lg font-semibold text-black mb-2"><strong>Address:</strong> 525 B St, San Diego, CA</p>
 
-                <div class="w-full relative overflow-hidden rounded-lg border border-gray-200">
+                <div class="mb-4">
+                    <a
+                        href="https://www.google.com/maps/dir/?api=1&destination=525+B+St+San+Diego+CA"
+                        target="_blank"
+                        class="text-sm font-medium underline text-black hover:opacity-70">
+                        Get Directions
+                    </a>
+                </div>
+
+                <div class="w-full lg:w-2/3 mx-auto overflow-hidden rounded-lg border border-gray-200">
                     <iframe
                         title="Google Map - 525 B St, San Diego, CA"
                         src="https://www.google.com/maps?q=525%20B%20St%2C%20San%20Diego%2C%20CA&output=embed"
@@ -120,18 +129,6 @@
                         allowfullscreen=""
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-                    <!-- Overlay to hide Google default bottom link -->
-                    <div class="absolute bottom-0 left-0 w-40 h-10 bg-white"></div>
-                </div>
-
-                <div class="mt-4">
-                    <a 
-                        href="https://www.google.com/maps/dir/?api=1&destination=525+B+St+San+Diego+CA"
-                        target="_blank"
-                        class="text-sm font-medium underline text-black hover:opacity-70">
-                        Directions
-                    </a>
                 </div>
             </div>
         </div>
