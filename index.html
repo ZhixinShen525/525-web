@@ -10,6 +10,21 @@
       .hero.hidden { display: none; }
       .page { display: none; }
       .page.active { display: block; }
+      /* Mobile menu open/close animation */
+      #mobile-menu {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-6px);
+        overflow: hidden;
+        pointer-events: none;
+        transition: max-height 300ms ease, opacity 200ms ease, transform 300ms ease;
+      }
+      #mobile-menu.open {
+        max-height: 360px;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
     </style>
 </head>
 <body>
@@ -40,19 +55,19 @@
     <div class="flex items-center lg:justify-self-end">
       <!-- Mobile menu button -->
       <button type="button"
-              class="lg:hidden text-xs font-bold uppercase tracking-widest text-black flex items-center"
+              class="lg:hidden text-2xl font-bold uppercase tracking-widest text-black flex items-center leading-none"
               aria-controls="mobile-menu"
               aria-expanded="false"
               data-mobile-menu-btn>
         <span>Menu</span>
-        <span class="ml-2 text-xs font-bold uppercase tracking-widest text-black leading-none" aria-hidden="true" data-menu-icon>▾</span>
+        <span class="ml-2 text-2xl font-bold uppercase tracking-widest text-black leading-none" aria-hidden="true" data-menu-icon>▾</span>
       </button>
     </div>
 
   </div>
 
   <!-- Mobile menu panel -->
-  <div id="mobile-menu" class="lg:hidden hidden bg-transparent">
+  <div id="mobile-menu" class="lg:hidden bg-transparent">
     <div class="w-1/2 ml-auto bg-white border-l border-b border-gray-100 px-6 py-4 flex flex-col gap-4">
       <a href="javascript:void(0)" data-view="about" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">About</a>
       <a href="javascript:void(0)" data-view="details" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">Address</a>
@@ -192,22 +207,22 @@
 
         function openMobileMenu() {
             if (!mobileMenu) return;
-            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('open');
             mobileMenuBtn?.setAttribute('aria-expanded', 'true');
             if (menuIcon) menuIcon.textContent = '×';
         }
 
         function closeMobileMenu() {
             if (!mobileMenu) return;
-            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('open');
             mobileMenuBtn?.setAttribute('aria-expanded', 'false');
             if (menuIcon) menuIcon.textContent = '▾';
         }
 
         function toggleMobileMenu() {
             if (!mobileMenu) return;
-            const isHidden = mobileMenu.classList.contains('hidden');
-            if (isHidden) openMobileMenu();
+            const isOpen = mobileMenu.classList.contains('open');
+            if (!isOpen) openMobileMenu();
             else closeMobileMenu();
         }
 
