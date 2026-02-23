@@ -15,14 +15,14 @@
 <body>
 
 <header class="fixed top-0 left-0 w-full bg-white/70 backdrop-blur-md z-50 border-b border-white/20">
-  <div class="max-w-7xl mx-auto px-4 h-10 grid grid-cols-3 items-center">
+  <div class="max-w-7xl mx-auto px-4 h-10 flex items-center justify-between lg:grid lg:grid-cols-3 lg:items-center">
 
     <div class="flex-shrink-0">
-      <h1 class="text-2xl font-serif tracking-tighter text-black font-bold cursor-pointer select-none" data-home>777 TOWER</h1>
+      <h1 class="text-2xl font-serif tracking-tighter text-black font-bold cursor-pointer select-none whitespace-nowrap" data-home>777 TOWER</h1>
     </div>
 
     <!-- Desktop nav -->
-    <nav class="hidden lg:flex space-x-8 h-full justify-self-center">
+    <nav class="hidden lg:flex space-x-8 h-full lg:justify-self-center">
       <a href="javascript:void(0)" data-view="about" class="group relative flex items-center h-full text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">
         <span class="absolute top-0 left-0 w-full h-1 bg-black scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
         About
@@ -37,22 +37,23 @@
       </a>
     </nav>
 
-    <div class="flex items-center justify-self-end">
+    <div class="flex items-center lg:justify-self-end">
       <!-- Mobile menu button -->
       <button type="button"
-              class="lg:hidden text-xs font-bold uppercase tracking-widest text-black"
+              class="lg:hidden text-xs font-bold uppercase tracking-widest text-black flex items-center"
               aria-controls="mobile-menu"
               aria-expanded="false"
               data-mobile-menu-btn>
-        Menu
+        <span>Menu</span>
+        <span class="ml-2 text-xs font-bold uppercase tracking-widest text-black leading-none" aria-hidden="true" data-menu-icon>▾</span>
       </button>
     </div>
 
   </div>
 
   <!-- Mobile menu panel -->
-  <div id="mobile-menu" class="lg:hidden hidden border-t border-gray-100 bg-white">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+  <div id="mobile-menu" class="lg:hidden hidden bg-transparent">
+    <div class="w-1/2 ml-auto bg-white border-l border-b border-gray-100 px-6 py-4 flex flex-col gap-4">
       <a href="javascript:void(0)" data-view="about" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">About</a>
       <a href="javascript:void(0)" data-view="details" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">Address</a>
       <a href="javascript:void(0)" data-view="contact" class="text-xs font-bold uppercase tracking-widest text-gray-800 hover:text-black">Contact</a>
@@ -186,18 +187,21 @@
 
         // Mobile menu
         const mobileMenuBtn = document.querySelector('[data-mobile-menu-btn]');
+        const menuIcon = document.querySelector('[data-menu-icon]');
         const mobileMenu = document.getElementById('mobile-menu');
 
         function openMobileMenu() {
             if (!mobileMenu) return;
             mobileMenu.classList.remove('hidden');
             mobileMenuBtn?.setAttribute('aria-expanded', 'true');
+            if (menuIcon) menuIcon.textContent = '×';
         }
 
         function closeMobileMenu() {
             if (!mobileMenu) return;
             mobileMenu.classList.add('hidden');
             mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+            if (menuIcon) menuIcon.textContent = '▾';
         }
 
         function toggleMobileMenu() {
