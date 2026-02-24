@@ -16,6 +16,7 @@
       position: absolute;
       top: 100%;
       right: 0;
+      z-index: 999;
       width: 50vw;
       max-width: 420px;
       background: rgba(255,255,255,0.92);
@@ -159,7 +160,7 @@
 </head>
 
 <body class="bg-[#f7f6f2] text-black min-h-screen flex flex-col">
-  <header class="relative fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-black/10">
+  <header class="relative fixed top-0 inset-x-0 z-[999] bg-[#f7f6f2]">
     <div class="max-w-7xl mx-auto px-4 h-10 flex items-center justify-between">
       <!-- Logo -->
       <a href="javascript:void(0)" class="text-xl font-serif font-semibold tracking-wide whitespace-nowrap" data-home>
